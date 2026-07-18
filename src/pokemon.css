@@ -366,7 +366,7 @@ figure img {
 @media (max-width: 820px) {
   .container {
     width: 100%;
-    padding: 20px;
+    padding: 40px;
   }
 
   h1 {
@@ -376,8 +376,9 @@ figure img {
 
   .cards {
     display: grid;
-    grid-template-columns: repeat(2, 280px);
-    gap: 50px;
+    grid-template-columns: repeat(2, 290px);
+    gap: 45px;
+    margin-right: 30px;
   }
 
   .pokemon-card,
