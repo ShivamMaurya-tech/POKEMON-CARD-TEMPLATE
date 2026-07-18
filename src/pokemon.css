@@ -350,10 +350,10 @@ figure img {
 /* Laptop */
 @media (max-width: 1399px) {
   .cards {
-    grid-template-columns: repeat(3, 300px);
+    grid-template-columns: repeat(3, 320px);
     justify-content: center;
-    gap: 40px;
-    padding-right: 55px;
+    gap: 30px;
+    padding-right: 20px;
   }
 }
 
