@@ -376,7 +376,7 @@ figure img {
 
   .cards {
     display: grid;
-    grid-template-columns: repeat(2, 220px);
+    grid-template-columns: repeat(2, 240px);
     gap: 60px;
   }
 
