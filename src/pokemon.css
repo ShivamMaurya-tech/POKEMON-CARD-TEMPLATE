@@ -365,8 +365,8 @@ figure img {
 /* Tablet */
 @media (max-width: 820px) {
   .container {
-    width: 95%;
-    padding: 20px;
+    width: 100%;
+    padding: 50px;
   }
 
   h1 {
