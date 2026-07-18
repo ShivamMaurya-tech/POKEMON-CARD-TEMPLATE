@@ -350,7 +350,7 @@ figure img {
 /* Laptop */
 @media (max-width: 1399px) {
   .cards {
-    grid-template-columns: repeat(3, 280px);
+    grid-template-columns: repeat(3, 300px);
     justify-content: center;
     gap: 40px;
     padding-right: 55px;
