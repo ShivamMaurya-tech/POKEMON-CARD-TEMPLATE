@@ -420,16 +420,6 @@ figure img {
 
 /* end of tab responsive css */
 
-/* 
-/* Tablet */
-@media (max-width: 992px) {
-  .cards {
-    grid-template-columns: repeat(3, 380px);
-    justify-content: center;
-    gap: 24px;
-  }
-}
-
 /* Mobile */
 @media (max-width: 576px) {
   .cards {
