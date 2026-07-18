@@ -418,16 +418,6 @@ figure img {
   }
 }
 
-/* for landscape */
-
-@media (max-width: 1006px) {
-  .cards {
-    grid-template-columns: repeat(3, 280px);
-    justify-content: center;
-    gap: 40px;
-    padding-right: 55px;
-  }
-}
 /* end of tab responsive css */
 
 /* 
