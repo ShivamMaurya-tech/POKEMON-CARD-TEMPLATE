@@ -431,14 +431,14 @@ figure img {
 } */
 
 /* Small Tablet */
-/* @media (max-width: 768px) { 
+@media (max-width: 768px) {
   .cards {
     grid-template-columns: repeat(2, 320px);
     justify-content: center;
     gap: 22px;
     margin-left: 40px;
   }
-} */
+}
 
 /* Mobile */
 @media (max-width: 576px) {
