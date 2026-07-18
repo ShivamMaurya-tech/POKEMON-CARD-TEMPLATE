@@ -8,8 +8,6 @@
 }
 
 body {
-  /* margin: 0; */
-  /* font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; */
   background:
     radial-gradient(
       circle at top left,
@@ -22,7 +20,6 @@ body {
       transparent 30%
     ),
     linear-gradient(135deg, #0f172a 0%, #172554 45%, #111827 100%);
-  /* min-height: 100vh; */
 }
 
 header {
