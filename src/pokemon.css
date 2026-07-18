@@ -367,7 +367,7 @@ figure img {
 }
 
 /* Small Tablet */
-@media (max-width: 768px) {
+@media (max-width: 800px) {
   .cards {
     grid-template-columns: repeat(2, 320px);
     justify-content: center;
