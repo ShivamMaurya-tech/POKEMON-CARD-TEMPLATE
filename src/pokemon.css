@@ -376,8 +376,8 @@ figure img {
 
   .cards {
     display: grid;
-    grid-template-columns: repeat(2, 260px);
-    gap: 60px;
+    grid-template-columns: repeat(2, 280px);
+    gap: 40px;
   }
 
   .pokemon-card,
