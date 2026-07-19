@@ -1,4 +1,4 @@
-import "./pokemon.css"; //css file
+import "./pokemon1.css"; //css file
 
 import { useEffect, useState } from "react";
 import { PokemonCards } from "./PokemonCards";

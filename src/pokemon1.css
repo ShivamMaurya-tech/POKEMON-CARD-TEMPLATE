@@ -1,0 +1,400 @@
+/* ==========================================================================
+   Global Polish & Base Styles
+   ========================================================================== */
+:root {
+  --accent: #ff4757;
+  --accent-2: #ff8a00;
+  --accent-3: #ffd54f;
+  --surface: rgba(255, 255, 255, 0.95);
+  --text: #1f2937;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  padding: 40px 20px;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255, 213, 79, 0.28),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(255, 71, 87, 0.2),
+      transparent 30%
+    ),
+    linear-gradient(135deg, #0f172a 0%, #172554 45%, #111827 100%);
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   Header & Search Layout Components
+   ========================================================================== */
+header {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.04em;
+  text-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.pokemon-searh {
+  max-width: 520px;
+  margin: 0 auto 24px;
+  width: 100%;
+}
+
+.pokemon-searh input {
+  width: 100%;
+  padding: 14px 18px;
+  border: none;
+  border-radius: 999px;
+  outline: none;
+  font-size: 1rem;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.pokemon-searh input:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(255, 71, 87, 0.22);
+}
+
+/* ==========================================================================
+   The Glowing Border Card Frame Engine (Fixed for 3D Out-of-Bounds Pop)
+   ========================================================================== */
+.pokemon-card,
+.pokeman-cards {
+  position: relative;
+  width: 100%;
+  max-width: 385px;
+  min-height: 420px;
+  padding: 9px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.18),
+    inset 0 1px 1px rgba(255, 255, 255, 0.35);
+
+  transition:
+    transform 0.45s cubic-bezier(0.25, 1, 0.5, 1),
+    box-shadow 0.45s ease;
+
+  /* CRITICAL: We DO NOT use overflow: hidden here so elements can break out! */
+  transform-style: preserve-3d;
+}
+
+/* 500% Moving Spectrum Border Track Animation */
+.pokemon-card::before,
+.pokeman-cards::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(
+    45deg,
+    #ff4d4d,
+    #ffcb05,
+    #4ade80,
+    #38bdf8,
+    #8b5cf6,
+    #ff4d4d
+  );
+  background-size: 500%;
+  z-index: -2;
+  animation: borderMove 8s linear infinite;
+  opacity: 0.95;
+}
+
+/* Inner Solid Contrast Layer */
+.pokemon-card::after,
+.pokeman-cards::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.94);
+  z-index: -1;
+}
+
+/* Content Container Layer - Handles 3D Depth */
+.pokemon-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 412px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 1;
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* ==========================================================================
+   Internal Card Content & Out-of-Bounds Pop Effect Layouts
+   ========================================================================== */
+.pokemon-card span::before {
+  content: "";
+  position: absolute;
+  right: -40px;
+  bottom: -40px;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background:
+    linear-gradient(#ff4d4d 50%, white 50%),
+    radial-gradient(circle, #111 8px, white 9px, white 18px, #111 19px);
+  opacity: 0.08;
+  transform: rotate(-25deg);
+  pointer-events: none;
+  z-index: 0;
+}
+
+figure {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  margin-bottom: 15px;
+  transform-style: preserve-3d;
+}
+
+/* The floating elemental aura behind the sprite */
+figure::before {
+  content: "";
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  background: radial-gradient(circle, #ffe066, #ffd43b00);
+  filter: blur(25px);
+  animation: floatGlow 5s ease-in-out infinite;
+}
+
+/* THE POPPING ELEMENT: Controlled transformations send this image outside borders */
+figure img {
+  width: 155px;
+  height: 155px;
+  object-fit: contain;
+  position: relative;
+  transition:
+    transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    filter 0.5s ease;
+  filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.2));
+  z-index: 10; /* Keeps it above everything else */
+}
+
+.pokemon-name {
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-align: center;
+  background: linear-gradient(90deg, #ff4d4d, #ff9900);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 12px;
+  z-index: 2;
+}
+
+.pokemon-highlight {
+  width: max-content;
+  margin: 0 auto;
+  padding: 8px 38px;
+  border-radius: 25px;
+  background: linear-gradient(90deg, #ff512f, #dd2476);
+  color: white;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(221, 36, 118, 0.3);
+  z-index: 2;
+}
+
+.grid-three {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* gap: 10px; */
+  margin-top: 18px;
+  z-index: 2;
+}
+
+.grid-three .pokemon-info {
+  /* padding: 10px; */
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(8px);
+  text-align: center;
+  color: var(--text);
+  font-weight: 600;
+  transition:
+    transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+    background-color 0.3s ease;
+}
+
+.grid-three .pokemon-info:hover {
+  transform: translateY(-5px) translateZ(10px);
+  background: #fff5d6;
+}
+
+/* ==========================================================================
+   Foil Sheen Shimmer & Interactive Animations
+   ========================================================================== */
+/* The shining sheet track - border-radius masked to fit inside card contours */
+.pokemon-card .shine {
+  position: absolute;
+  inset: 4px;
+  border-radius: 24px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.55),
+    transparent
+  );
+  transform: translateX(-150%) skewX(-25deg);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Card Tilt Mechanics + Glow Intensification */
+.pokemon-card:hover {
+  transform: perspective(1000px) rotateX(8deg) rotateY(-8deg) translateY(-14px)
+    scale(1.04);
+  box-shadow:
+    0 40px 70px rgba(0, 0, 0, 0.3),
+    0 0 45px rgba(255, 203, 5, 0.6),
+    0 0 65px rgba(255, 77, 77, 0.4);
+}
+
+/* Brings text info slightly closer on hover */
+.pokemon-card:hover .pokemon-card-inner {
+  transform: translateZ(20px);
+}
+
+/* 
+   THE MAGIC POP: When hovered, the image scales up large, 
+   shifts up out of the bounding box framework, and gains deep shadows!
+*/
+.pokemon-card:hover img {
+  transform: translateY(-32px) scale(1.35) rotate(-4deg) translateZ(60px);
+  filter: drop-shadow(0 25px 20px rgba(0, 0, 0, 0.45));
+}
+
+/* Triggers inside-the-card continuous reflection light sweep */
+.pokemon-card:hover .shine {
+  animation: shine 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-150%) skewX(-25deg);
+  }
+  100% {
+    transform: translateX(150%) skewX(-25deg);
+  }
+}
+
+@keyframes borderMove {
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 500%;
+  }
+}
+
+@keyframes floatGlow {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.05);
+  }
+}
+
+/* ==========================================================================
+   Fluid Layout Grid System (Responsive Architecture)
+   ========================================================================== */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 300px));
+  justify-content: center;
+  justify-items: center;
+  gap: 38px; /* Slightly increased gap to give room for popping images */
+  padding-top: 40px;
+  list-style: none;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (min-width: 1400px) {
+  .cards {
+    grid-template-columns: repeat(3, 300px);
+    gap: 60px;
+  }
+}
+
+@media (max-width: 1399px) and (min-width: 993px) {
+  .cards {
+    grid-template-columns: repeat(3, 285px);
+    gap: 50px;
+  }
+}
+
+@media (max-width: 992px) and (min-width: 577px) {
+  .container {
+    padding: 0 40px;
+  }
+  header h1 {
+    font-size: 2.3rem;
+  }
+  .cards {
+    grid-template-columns: repeat(2, 285px);
+    gap: 50px;
+  }
+}
+
+@media (max-width: 576px) {
+  body {
+    padding: 20px 12px;
+  }
+  .cards {
+    grid-template-columns: minmax(0, 285px);
+    gap: 35px;
+  }
+}
